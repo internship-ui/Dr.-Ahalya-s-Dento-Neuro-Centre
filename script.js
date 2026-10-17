@@ -10,214 +10,29 @@
 // ---------------------------------------------------------------------------
 const DENTAL_LAUNCH_CONFIG = {
   clinicName: 'Dr. Ahalya’s Dento Neuro Centre',
-  targetUrl: 'http://www.drahalyasdentoneurocentre.com/',
+  targetUrl: 'https://www.drahalyasdentoneurocentre.com/',
   openInNewTab: false,
   autoRedirect: true,
   theme: localStorage.getItem('launch_theme') || 'dark',
   redirectDelayMs: 2800,
-  soundEnabled: true
+  soundEnabled: false
 };
 try { localStorage.removeItem('launch_target_url'); } catch (e) {}
 
 // ---------------------------------------------------------------------------
-// 2. Procedural Crystal Audio Synthesizer (Dental Clinic Harmonies)
+// 2. Silent Audio Engine (Sound Completely Disabled)
 // ---------------------------------------------------------------------------
 class DentalSoundEngine {
   constructor() {
     this.ctx = null;
-    this.enabled = true;
+    this.enabled = false;
   }
-
-  init() {
-    if (!this.ctx) {
-      const AudioCtx = window.AudioContext || window.webkitAudioContext;
-      if (AudioCtx) {
-        this.ctx = new AudioCtx();
-      }
-    }
-    if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume();
-    }
-  }
-
-  // Sparkling crystalline chime for countdown (3, 2, 1)
-  playCrystalChime(freq = 587.33, duration = 0.35) {
-    if (!this.enabled) return;
-    this.init();
-    if (!this.ctx) return;
-
-    try {
-      const now = this.ctx.currentTime;
-
-      // Primary tone (triangle wave for pure bell-like warmth)
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(freq, now);
-
-      // Shimmer overtone (2.5x frequency for crystal sparkle)
-      const sparkleOsc = this.ctx.createOscillator();
-      const sparkleGain = this.ctx.createGain();
-      sparkleOsc.type = 'sine';
-      sparkleOsc.frequency.setValueAtTime(freq * 2.76, now);
-
-      gain.gain.setValueAtTime(0.001, now);
-      gain.gain.linearRampToValueAtTime(0.24, now + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
-
-      sparkleGain.gain.setValueAtTime(0.001, now);
-      sparkleGain.gain.linearRampToValueAtTime(0.08, now + 0.01);
-      sparkleGain.gain.exponentialRampToValueAtTime(0.001, now + duration * 0.7);
-
-      osc.connect(gain);
-      sparkleOsc.connect(sparkleGain);
-      gain.connect(this.ctx.destination);
-      sparkleGain.connect(this.ctx.destination);
-
-      osc.start(now);
-      sparkleOsc.start(now);
-      osc.stop(now + duration);
-      sparkleOsc.stop(now + duration);
-    } catch (e) {
-      console.warn('Audio playback error', e);
-    }
-  }
-
-  // Pneumatic Celebration Cannon Pop Sound
-  playPopBlaster() {
-    if (!this.enabled) return;
-    this.init();
-    if (!this.ctx) return;
-
-    try {
-      const now = this.ctx.currentTime;
-      const bufferSize = this.ctx.sampleRate * 0.45;
-      const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
-      const output = buffer.getChannelData(0);
-
-      // White noise air-pop burst
-      for (let i = 0; i < bufferSize; i++) {
-        output[i] = (Math.random() * 2 - 1) * Math.exp(-i / (this.ctx.sampleRate * 0.055));
-      }
-
-      const whiteNoise = this.ctx.createBufferSource();
-      whiteNoise.buffer = buffer;
-
-      const filter = this.ctx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(1800, now);
-      filter.frequency.exponentialRampToValueAtTime(250, now + 0.3);
-
-      const gain = this.ctx.createGain();
-      gain.gain.setValueAtTime(0.55, now);
-      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
-
-      // Low end thump
-      const subOsc = this.ctx.createOscillator();
-      const subGain = this.ctx.createGain();
-      subOsc.frequency.setValueAtTime(150, now);
-      subOsc.frequency.exponentialRampToValueAtTime(50, now + 0.28);
-
-      subGain.gain.setValueAtTime(0.45, now);
-      subGain.gain.exponentialRampToValueAtTime(0.01, now + 0.28);
-
-      whiteNoise.connect(filter);
-      filter.connect(gain);
-      gain.connect(this.ctx.destination);
-
-      subOsc.connect(subGain);
-      subGain.connect(this.ctx.destination);
-
-      whiteNoise.start(now);
-      subOsc.start(now);
-      subOsc.stop(now + 0.3);
-    } catch (e) {
-      console.warn('Audio playback error', e);
-    }
-  }
-
-  // Grand Dental Clinic Opening Harpsichord / Chime Fanfare
-  playCelebrationFanfare() {
-    if (!this.enabled) return;
-    this.init();
-    if (!this.ctx) return;
-
-    try {
-      const now = this.ctx.currentTime;
-      // D Major / Ethereal chord arpeggio (D5, F#5, A5, D6)
-      const notes = [587.33, 739.99, 880.00, 1174.66];
-      notes.forEach((freq, idx) => {
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        const startTime = now + idx * 0.09;
-        const dur = 1.1;
-
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, startTime);
-
-        gain.gain.setValueAtTime(0.001, startTime);
-        gain.gain.linearRampToValueAtTime(0.2, startTime + 0.04);
-        gain.gain.exponentialRampToValueAtTime(0.001, startTime + dur);
-
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-
-        osc.start(startTime);
-        osc.stop(startTime + dur);
-      });
-    } catch (e) {
-      console.warn('Audio playback error', e);
-    }
-  }
-
-  // Realistic Staccato Cracker Pop Sequence
-  playCracker() {
-    if (!this.enabled) return;
-    this.init();
-    if (!this.ctx) return;
-    try {
-      const now = this.ctx.currentTime;
-      const count = 3 + Math.floor(Math.random() * 3);
-      for (let i = 0; i < count; i++) {
-        const offset = i * 0.045 + Math.random() * 0.02;
-        const dur = 0.07;
-        const buffer = this.ctx.createBuffer(1, Math.floor(this.ctx.sampleRate * dur), this.ctx.sampleRate);
-        const data = buffer.getChannelData(0);
-        for (let j = 0; j < data.length; j++) {
-          data[j] = (Math.random() * 2 - 1) * Math.exp(-j / (this.ctx.sampleRate * 0.015));
-        }
-        const src = this.ctx.createBufferSource();
-        src.buffer = buffer;
-        const gain = this.ctx.createGain();
-        gain.gain.setValueAtTime(0.35, now + offset);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + offset + dur);
-        src.connect(gain);
-        gain.connect(this.ctx.destination);
-        src.start(now + offset);
-      }
-    } catch (e) {}
-  }
-
-  // Aerial Firework Detonation Boom
-  playFireworkBoom() {
-    if (!this.enabled) return;
-    this.init();
-    if (!this.ctx) return;
-    try {
-      const now = this.ctx.currentTime;
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(160, now);
-      osc.frequency.exponentialRampToValueAtTime(35, now + 0.4);
-      gain.gain.setValueAtTime(0.5, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-      osc.start(now);
-      osc.stop(now + 0.45);
-    } catch (e) {}
-  }
+  init() {}
+  playCrystalChime() {}
+  playPopBlaster() {}
+  playCelebrationFanfare() {}
+  playCracker() {}
+  playFireworkBoom() {}
 }
 
 const sounds = new DentalSoundEngine();

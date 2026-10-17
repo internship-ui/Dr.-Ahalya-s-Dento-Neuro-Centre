@@ -13,64 +13,10 @@
   window.__CELEBRATION_FIREWORKS_LOADED__ = true;
 
   // -------------------------------------------------------------------------
-  // 1. Procedural Audio Synthesizer (Booms & Crackers)
+  // 1. Silent Audio Engine (Sound Completely Disabled)
   // -------------------------------------------------------------------------
-  let audioCtx = null;
-  function getAudioContext() {
-    if (!audioCtx) {
-      const AudioCtx = window.AudioContext || window.webkitAudioContext;
-      if (AudioCtx) audioCtx = new AudioCtx();
-    }
-    if (audioCtx && audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-    return audioCtx;
-  }
-
-  function playFireworkBoom() {
-    try {
-      const ctx = getAudioContext();
-      if (!ctx) return;
-      const now = ctx.currentTime;
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(150, now);
-      osc.frequency.exponentialRampToValueAtTime(30, now + 0.38);
-      gain.gain.setValueAtTime(0.45, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.42);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(now);
-      osc.stop(now + 0.42);
-    } catch (e) {}
-  }
-
-  function playCrackerPop() {
-    try {
-      const ctx = getAudioContext();
-      if (!ctx) return;
-      const now = ctx.currentTime;
-      const count = 3 + Math.floor(Math.random() * 3);
-      for (let i = 0; i < count; i++) {
-        const offset = i * 0.045 + Math.random() * 0.02;
-        const dur = 0.06;
-        const buffer = ctx.createBuffer(1, Math.floor(ctx.sampleRate * dur), ctx.sampleRate);
-        const data = buffer.getChannelData(0);
-        for (let j = 0; j < data.length; j++) {
-          data[j] = (Math.random() * 2 - 1) * Math.exp(-j / (ctx.sampleRate * 0.015));
-        }
-        const src = ctx.createBufferSource();
-        src.buffer = buffer;
-        const gain = ctx.createGain();
-        gain.gain.setValueAtTime(0.3, now + offset);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + offset + dur);
-        src.connect(gain);
-        gain.connect(ctx.destination);
-        src.start(now + offset);
-      }
-    } catch (e) {}
-  }
+  function playFireworkBoom() {}
+  function playCrackerPop() {}
 
   // -------------------------------------------------------------------------
   // 2. Setup Celebration Overlay Elements
