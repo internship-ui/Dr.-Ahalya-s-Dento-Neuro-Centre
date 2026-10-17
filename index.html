@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="style.css?v=4.0">
+  <link rel="stylesheet" href="style.css?v=5.0">
 </head>
 <body class="dental-theme">
   <!-- Dynamic Ambient Canvas (Floating Pearlescent Orbs & Diamond Sparkles) -->
@@ -263,7 +263,37 @@
     </div>
   </aside>
 
+  <!-- Live Opened Website Portal with Fireworks Celebration Overlay -->
+  <div class="website-portal-overlay" id="website-portal-overlay">
+    <div class="portal-header-bar">
+      <div class="portal-brand-identity">
+        <img src="assets/tooth_3d.png" alt="3D Tooth" class="portal-brand-tooth">
+        <div class="portal-brand-copy">
+          <span class="portal-live-title" id="portal-live-clinic-name">DR. AHALYA’S DENTO NEURO CENTRE</span>
+          <span class="portal-live-badge">🎆 OFFICIALLY UNVEILED & LIVE</span>
+        </div>
+      </div>
+
+      <div class="portal-control-actions">
+        <button id="fireworks-burst-btn" class="portal-action-btn" title="Ignite more firecrackers">
+          <span>🎆 More Crackers</span>
+        </button>
+        <button id="portal-open-tab-btn" class="portal-action-btn primary-portal-btn" title="Open website in full browser tab">
+          <span>Open in Full Tab ↗</span>
+        </button>
+        <button id="portal-close-btn" class="portal-action-btn close-portal-btn" title="Return to Launchpad">
+          <span>✕ Return</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Live Webpage Frame -->
+    <div class="portal-iframe-container">
+      <iframe id="opened-website-iframe" src="about:blank" title="Dr. Ahalya’s Dento Neuro Centre Official Website" allow="fullscreen"></iframe>
+    </div>
+  </div>
+
   <!-- Scripts -->
-  <script src="script.js?v=4.0"></script>
+  <script src="script.js?v=5.0"></script>
 </body>
 </html>

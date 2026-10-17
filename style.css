@@ -91,6 +91,16 @@ body {
   pointer-events: none;
 }
 
+#fireworks-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100000;
+  pointer-events: none;
+}
+
 /* Floating Sparkle Ambient Layer */
 .sparkle-layer {
   position: fixed;

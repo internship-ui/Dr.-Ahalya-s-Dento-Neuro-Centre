@@ -533,6 +533,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const fireworksCanvas = document.getElementById('fireworks-canvas');
   const fireworksEngine = new FireworksCrackersEngine(fireworksCanvas);
 
+  // Live Opened Website Portal Elements
+  const websitePortalOverlay = document.getElementById('website-portal-overlay');
+  const openedWebsiteIframe = document.getElementById('opened-website-iframe');
+  const portalLiveClinicName = document.getElementById('portal-live-clinic-name');
+  const fireworksBurstBtn = document.getElementById('fireworks-burst-btn');
+  const portalOpenTabBtn = document.getElementById('portal-open-tab-btn');
+  const portalCloseBtn = document.getElementById('portal-close-btn');
+
 
 
   // Circumference: 2 * Math.PI * 130 = ~816.81
@@ -614,8 +622,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function executeWebsiteNavigation() {
     celebrationPanel.classList.remove('active');
-    // Direct navigation to official clinic website (no iframe / no blank screen / full responsive display)
-    window.location.href = DENTAL_LAUNCH_CONFIG.targetUrl;
+    countdownOverlay.classList.remove('active');
+
+    // Display the live website screen with fireworks and crackers exploding over it
+    if (openedWebsiteIframe && websitePortalOverlay) {
+      if (portalLiveClinicName) portalLiveClinicName.textContent = DENTAL_LAUNCH_CONFIG.clinicName;
+      openedWebsiteIframe.src = DENTAL_LAUNCH_CONFIG.targetUrl;
+      websitePortalOverlay.classList.add('active');
+      document.body.classList.add('portal-open');
+
+      // Grand celebration fireworks & crackers on this screen for 8.5 seconds (SILENT, no sound)
+      if (fireworksEngine) {
+        fireworksEngine.startShow(8500);
+      }
+    } else {
+      window.location.href = DENTAL_LAUNCH_CONFIG.targetUrl;
+    }
   }
 
   function startLaunchCountdown() {
@@ -728,6 +750,11 @@ document.addEventListener('DOMContentLoaded', () => {
     progressCircle.style.strokeDashoffset = 0;
     celebrationEngine.clear();
     fireworksEngine.clear();
+    document.body.classList.remove('portal-open');
+    if (websitePortalOverlay) {
+      websitePortalOverlay.classList.remove('active');
+      if (openedWebsiteIframe) openedWebsiteIframe.src = 'about:blank';
+    }
   }
 
   // Master Launch Button Click
@@ -744,4 +771,23 @@ document.addEventListener('DOMContentLoaded', () => {
   relaunchBtn.addEventListener('click', () => {
     resetLaunchExperience();
   });
+
+  // Live Portal Control Handlers
+  if (fireworksBurstBtn) {
+    fireworksBurstBtn.addEventListener('click', () => {
+      if (fireworksEngine) fireworksEngine.startShow(6000);
+    });
+  }
+
+  if (portalOpenTabBtn) {
+    portalOpenTabBtn.addEventListener('click', () => {
+      window.open(DENTAL_LAUNCH_CONFIG.targetUrl, '_blank', 'noopener,noreferrer');
+    });
+  }
+
+  if (portalCloseBtn) {
+    portalCloseBtn.addEventListener('click', () => {
+      resetLaunchExperience();
+    });
+  }
 });
