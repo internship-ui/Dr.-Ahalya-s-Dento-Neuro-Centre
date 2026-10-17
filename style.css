@@ -652,7 +652,7 @@ body {
 .dest-url {
   color: var(--accent-cyan);
   text-decoration: none;
-  max-width: 230px;
+  max-width: 380px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

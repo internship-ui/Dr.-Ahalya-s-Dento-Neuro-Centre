@@ -45,15 +45,6 @@
     </div>
 
     <div class="top-actions">
-      <!-- Target URL & Clinic Info Settings -->
-      <button id="url-config-btn" class="icon-btn" title="Configure your dental website link and clinic name">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-        </svg>
-        <span class="btn-text">Clinic Website Link</span>
-      </button>
-
       <!-- Small Theme Toggle Button (Dark / Light Gray) -->
       <button id="theme-toggle-btn" class="icon-btn theme-btn" title="Switch Theme (Dark / Light Gray)" aria-label="Toggle Light Gray Theme">
         <svg class="theme-sun-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -71,20 +62,6 @@
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
         <span class="btn-text" id="theme-btn-text">Light Gray</span>
-      </button>
-
-      <!-- Audio / Chime Toggle -->
-      <button id="sound-btn" class="icon-btn active" title="Toggle Dental Harmony Audio">
-        <svg class="sound-on-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-        </svg>
-        <svg class="sound-off-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-          <line x1="23" y1="9" x2="17" y2="15"></line>
-          <line x1="17" y1="9" x2="23" y2="15"></line>
-        </svg>
-        <span class="btn-text" id="sound-status-text">Audio Active</span>
       </button>
     </div>
   </header>
@@ -168,9 +145,8 @@
 
       <!-- Destination Website Link Preview -->
       <div class="destination-preview" id="destination-preview">
-        <span class="dest-label">Clinic Destination:</span>
-        <a href="#" id="preview-url-text" class="dest-url" target="_blank" rel="noopener noreferrer">https://example.com</a>
-        <button id="edit-inline-btn" class="dest-edit-btn" title="Change clinic link">Change URL</button>
+        <span class="dest-label">Official Clinic Website:</span>
+        <a href="http://www.drahalyasdentoneurocentre.com/" id="preview-url-text" class="dest-url" target="_blank" rel="noopener noreferrer">www.drahalyasdentoneurocentre.com</a>
       </div>
     </div>
 
@@ -317,76 +293,7 @@
     </div>
   </div>
 
-  <!-- Destination URL & Clinic Customization Modal -->
-  <div class="modal-backdrop" id="url-modal">
-    <div class="modal-card dental-modal-card">
-      <div class="modal-header">
-        <div class="modal-title-wrap">
-          <div class="modal-icon"><img src="assets/tooth_3d.png" alt="3D Tooth" class="modal-tooth-3d-img"></div>
-          <h3>Dental Clinic Launch Settings</h3>
-        </div>
-        <button id="close-modal-btn" class="modal-close" aria-label="Close modal">&times;</button>
-      </div>
-
-      <p class="modal-subtitle">
-        Customize your dental clinic name and website destination. When patients or guests press <strong>UNVEIL YOUR SMILE</strong>, they will experience the countdown and pop blasters before being directed here.
-      </p>
-
-      <form id="url-config-form" class="url-form">
-        <div class="input-group">
-          <label for="clinic-name-input">Clinic / Doctor Name</label>
-          <div class="input-wrapper">
-            <span class="url-prefix-icon">🏥</span>
-            <input 
-              type="text" 
-              id="clinic-name-input" 
-              placeholder="e.g. Dr. Ahalya’s Dento Neuro Centre" 
-              value="Dr. Ahalya’s Dento Neuro Centre"
-              required
-            >
-          </div>
-        </div>
-
-        <div class="input-group">
-          <label for="website-url-input">Dental Website Target URL</label>
-          <div class="input-wrapper">
-            <span class="url-prefix-icon">🌐</span>
-            <input 
-              type="url" 
-              id="website-url-input" 
-              placeholder="https://yourdentalclinic.com" 
-              value="https://example.com" 
-              required
-              autocomplete="url"
-            >
-          </div>
-          <span class="input-hint">Your live dental website (include <code>https://</code>)</span>
-        </div>
-
-        <div class="toggle-group">
-          <label class="switch-label">
-            <input type="checkbox" id="open-new-tab-checkbox">
-            <span class="toggle-slider"></span>
-            <span class="toggle-text">Open dental website in a new tab</span>
-          </label>
-        </div>
-
-        <div class="toggle-group">
-          <label class="switch-label">
-            <input type="checkbox" id="auto-redirect-checkbox" checked>
-            <span class="toggle-slider"></span>
-            <span class="toggle-text">Auto-redirect after blaster celebration (2.5s)</span>
-          </label>
-        </div>
-
-        <div class="modal-buttons">
-          <button type="button" id="modal-cancel-btn" class="action-btn secondary-action">Cancel</button>
-          <button type="submit" class="action-btn primary-action dental-primary-btn">Save Settings</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
+  <!-- Scripts -->
   <script src="script.js"></script>
 </body>
 </html>

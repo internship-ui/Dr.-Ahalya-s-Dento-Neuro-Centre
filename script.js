@@ -8,20 +8,16 @@
 // ---------------------------------------------------------------------------
 // 1. Configuration & Persistent State
 // ---------------------------------------------------------------------------
-const savedClinic = localStorage.getItem('launch_clinic_name');
-const initialClinicName = (!savedClinic || savedClinic === 'LUMINA DENTAL CLINIC')
-  ? 'Dr. Ahalya’s Dento Neuro Centre'
-  : savedClinic;
-
 const DENTAL_LAUNCH_CONFIG = {
-  clinicName: initialClinicName,
-  targetUrl: localStorage.getItem('launch_target_url') || 'https://example.com',
-  openInNewTab: localStorage.getItem('launch_new_tab') === 'true',
-  autoRedirect: localStorage.getItem('launch_auto_redirect') !== 'false',
+  clinicName: 'Dr. Ahalya’s Dento Neuro Centre',
+  targetUrl: 'http://www.drahalyasdentoneurocentre.com/',
+  openInNewTab: false,
+  autoRedirect: true,
   theme: localStorage.getItem('launch_theme') || 'dark',
   redirectDelayMs: 2800,
   soundEnabled: true
 };
+try { localStorage.removeItem('launch_target_url'); } catch (e) {}
 
 // ---------------------------------------------------------------------------
 // 2. Procedural Crystal Audio Synthesizer (Dental Clinic Harmonies)
@@ -673,22 +669,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const muzzleFlashRight = document.getElementById('muzzle-flash-right');
 
   const displayClinicName = document.getElementById('display-clinic-name');
-  const clinicNameInput = document.getElementById('clinic-name-input');
   const previewUrlText = document.getElementById('preview-url-text');
-  const urlConfigBtn = document.getElementById('url-config-btn');
-  const editInlineBtn = document.getElementById('edit-inline-btn');
-  const urlModal = document.getElementById('url-modal');
-  const closeModalBtn = document.getElementById('close-modal-btn');
-  const modalCancelBtn = document.getElementById('modal-cancel-btn');
-  const urlConfigForm = document.getElementById('url-config-form');
-  const websiteUrlInput = document.getElementById('website-url-input');
-  const openNewTabCheckbox = document.getElementById('open-new-tab-checkbox');
-  const autoRedirectCheckbox = document.getElementById('auto-redirect-checkbox');
-
-  const soundBtn = document.getElementById('sound-btn');
-  const soundStatusText = document.getElementById('sound-status-text');
-  const soundOnIcon = soundBtn.querySelector('.sound-on-icon');
-  const soundOffIcon = soundBtn.querySelector('.sound-off-icon');
 
   // Small Theme Switcher Elements
   const themeToggleBtn = document.getElementById('theme-toggle-btn');
@@ -753,75 +734,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize UI State
   function syncDestinationUI() {
-    displayClinicName.textContent = DENTAL_LAUNCH_CONFIG.clinicName;
-    clinicNameInput.value = DENTAL_LAUNCH_CONFIG.clinicName;
-    previewUrlText.textContent = DENTAL_LAUNCH_CONFIG.targetUrl;
-    previewUrlText.href = DENTAL_LAUNCH_CONFIG.targetUrl;
-    websiteUrlInput.value = DENTAL_LAUNCH_CONFIG.targetUrl;
-    openNewTabCheckbox.checked = DENTAL_LAUNCH_CONFIG.openNewTab;
-    autoRedirectCheckbox.checked = DENTAL_LAUNCH_CONFIG.autoRedirect;
+    if (displayClinicName) displayClinicName.textContent = DENTAL_LAUNCH_CONFIG.clinicName;
+    if (previewUrlText) {
+      previewUrlText.textContent = 'www.drahalyasdentoneurocentre.com';
+      previewUrlText.href = DENTAL_LAUNCH_CONFIG.targetUrl;
+    }
   }
   syncDestinationUI();
-
-  // Sound Toggle Handler
-  soundBtn.addEventListener('click', () => {
-    DENTAL_LAUNCH_CONFIG.soundEnabled = !DENTAL_LAUNCH_CONFIG.soundEnabled;
-    sounds.enabled = DENTAL_LAUNCH_CONFIG.soundEnabled;
-
-    if (DENTAL_LAUNCH_CONFIG.soundEnabled) {
-      soundBtn.classList.add('active');
-      soundStatusText.textContent = 'Audio Active';
-      soundOnIcon.style.display = 'block';
-      soundOffIcon.style.display = 'none';
-      sounds.playCrystalChime(740, 0.2);
-    } else {
-      soundBtn.classList.remove('active');
-      soundStatusText.textContent = 'Audio Muted';
-      soundOnIcon.style.display = 'none';
-      soundOffIcon.style.display = 'block';
-    }
-  });
-
-  // Modal Dialog Handlers
-  function openUrlModal() {
-    urlModal.classList.add('open');
-    clinicNameInput.focus();
-  }
-
-  function closeUrlModal() {
-    urlModal.classList.remove('open');
-  }
-
-  urlConfigBtn.addEventListener('click', openUrlModal);
-  editInlineBtn.addEventListener('click', openUrlModal);
-  closeModalBtn.addEventListener('click', closeUrlModal);
-  modalCancelBtn.addEventListener('click', closeUrlModal);
-
-  urlModal.addEventListener('click', (e) => {
-    if (e.target === urlModal) closeUrlModal();
-  });
-
-  urlConfigForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const clinicName = clinicNameInput.value.trim() || 'Dr. Ahalya’s Dento Neuro Centre';
-    let url = websiteUrlInput.value.trim();
-    if (!url.startsWith('http://') && !url.startsWith('https://')) {
-      url = 'https://' + url;
-    }
-
-    DENTAL_LAUNCH_CONFIG.clinicName = clinicName;
-    DENTAL_LAUNCH_CONFIG.targetUrl = url;
-    DENTAL_LAUNCH_CONFIG.openNewTab = openNewTabCheckbox.checked;
-    DENTAL_LAUNCH_CONFIG.autoRedirect = autoRedirectCheckbox.checked;
-
-    localStorage.setItem('launch_clinic_name', clinicName);
-    localStorage.setItem('launch_target_url', url);
-    localStorage.setItem('launch_new_tab', DENTAL_LAUNCH_CONFIG.openNewTab);
-    localStorage.setItem('launch_auto_redirect', DENTAL_LAUNCH_CONFIG.autoRedirect);
-
-    syncDestinationUI();
-    closeUrlModal();
-  });
 
   // -------------------------------------------------------------------------
   // Interactive 3D Tooth Gyroscopic / Mouse Perspective Tracking
