@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Official Grand Launch for Dr. Ahalya’s Dento Neuro Centre - Advanced dental artistry, neuromuscular precision, and comprehensive oral healthcare.">
+  <title>Dr. Ahalya’s Dento Neuro Centre | Grand Digital Launch</title>
+  
+  <!-- Google Fonts for Ultra-Luxury Healthcare & Dental Artistry -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dental-theme">
+  <!-- Dynamic Ambient Canvas (Floating Pearlescent Orbs & Diamond Sparkles) -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Confetti and Dual Pop Blaster Celebration Canvas -->
+  <canvas id="celebration-canvas"></canvas>
+
+  <!-- Grand Fireworks & Crackers Celebration Canvas -->
+  <canvas id="fireworks-canvas"></canvas>
+
+  <!-- Floating Sparkle Accents -->
+  <div class="sparkle-layer" aria-hidden="true">
+    <div class="sparkle s-1">✦</div>
+    <div class="sparkle s-2">✧</div>
+    <div class="sparkle s-3">✦</div>
+    <div class="sparkle s-4">✧</div>
+    <div class="sparkle s-5">✦</div>
+  </div>
+
+  <!-- Top Clinic Navigation Bar -->
+  <header class="top-bar">
+    <div class="clinic-brand-pill">
+      <div class="clinic-logo-icon">
+        <img src="assets/tooth_3d.png" alt="3D Dental Tooth" class="brand-tooth-3d-img">
+      </div>
+      <div class="brand-text-wrap">
+        <span class="brand-title" id="display-clinic-name">DR. AHALYA’S DENTO NEURO CENTRE</span>
+        <span class="brand-tagline">ADVANCED DENTAL & NEUROLOGICAL CARE</span>
+      </div>
+    </div>
+
+    <div class="top-actions">
+      <!-- Target URL & Clinic Info Settings -->
+      <button id="url-config-btn" class="icon-btn" title="Configure your dental website link and clinic name">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+        </svg>
+        <span class="btn-text">Clinic Website Link</span>
+      </button>
+
+      <!-- Small Theme Toggle Button (Dark / Light Gray) -->
+      <button id="theme-toggle-btn" class="icon-btn theme-btn" title="Switch Theme (Dark / Light Gray)" aria-label="Toggle Light Gray Theme">
+        <svg class="theme-sun-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="theme-moon-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <span class="btn-text" id="theme-btn-text">Light Gray</span>
+      </button>
+
+      <!-- Audio / Chime Toggle -->
+      <button id="sound-btn" class="icon-btn active" title="Toggle Dental Harmony Audio">
+        <svg class="sound-on-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+        <svg class="sound-off-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <line x1="23" y1="9" x2="17" y2="15"></line>
+          <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+        <span class="btn-text" id="sound-status-text">Audio Active</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Dental Launch Stage -->
+  <main class="launch-stage" id="launch-stage">
+    
+    <!-- Central Luxury Frosted Dental Card -->
+    <div class="portal-card dental-card" id="portal-card">
+      
+      <!-- Clinic Accreditations Badge -->
+      <div class="badge-container">
+        <div class="glow-tag dental-badge">
+          <span class="tooth-glint">✨</span>
+          <span>GRAND CLINIC DIGITAL UNVEILING</span>
+          <span class="tooth-glint">✨</span>
+        </div>
+      </div>
+
+      <!-- Main Headline with Serif Elegance and Turquoise-Pearl Gradient -->
+      <h1 class="portal-title dental-title">
+        Experience The Apex of <br>
+        <span class="gradient-text dental-gradient">Oral Artistry</span>
+      </h1>
+
+      <p class="portal-description dental-subtitle">
+        Where compassionate healthcare meets porcelain perfection. Click below to inaugurate our digital clinic with the official countdown sequence.
+      </p>
+
+      <!-- Pillar Badges of Dental Excellence -->
+      <div class="dental-perks-row">
+        <div class="perk-pill">
+          <span class="perk-dot"></span>
+          <span>Painless Care</span>
+        </div>
+        <div class="perk-pill">
+          <span class="perk-dot"></span>
+          <span>Laser Smile Design</span>
+        </div>
+        <div class="perk-pill">
+          <span class="perk-dot"></span>
+          <span>3D Enamel Sculpting</span>
+        </div>
+      </div>
+
+      <!-- The Grand Dental Launch Button Container -->
+      <div class="button-wrapper">
+        <!-- Floating Halo Radiance Rings -->
+        <div class="dental-halo halo-1"></div>
+        <div class="dental-halo halo-2"></div>
+        <div class="dental-halo halo-3"></div>
+
+        <!-- Master Dental Launch Button -->
+        <button id="master-launch-btn" class="launch-btn dental-launch-btn" aria-label="Launch Dental Clinic Website">
+          <div class="btn-shimmer-sweep"></div>
+          <div class="btn-inner-glow"></div>
+          
+          <div class="btn-content">
+            <!-- Ultra-Clear Realistic 3D Porcelain Dental Tooth with Interactive Tilt -->
+            <div class="tooth-3d-container" id="tooth-3d-container">
+              <div class="tooth-3d-aura"></div>
+              <div class="tooth-3d-perspective-wrap">
+                <img 
+                  src="assets/tooth_3d.png" 
+                  alt="3D Porcelain Enamel Dental Tooth" 
+                  class="tooth-3d-img" 
+                  id="tooth-3d-img"
+                >
+                <div class="tooth-3d-flare"></div>
+                <span class="tooth-3d-sparkle spk-top-left">✦</span>
+                <span class="tooth-3d-sparkle spk-top-right">✧</span>
+                <span class="tooth-3d-sparkle spk-crown">✨</span>
+              </div>
+            </div>
+
+            <span class="btn-title dental-btn-title">UNVEIL YOUR SMILE</span>
+            <span class="btn-subtitle dental-btn-subtitle">CLICK TO LAUNCH CLINIC</span>
+          </div>
+        </button>
+      </div>
+
+      <!-- Destination Website Link Preview -->
+      <div class="destination-preview" id="destination-preview">
+        <span class="dest-label">Clinic Destination:</span>
+        <a href="#" id="preview-url-text" class="dest-url" target="_blank" rel="noopener noreferrer">https://example.com</a>
+        <button id="edit-inline-btn" class="dest-edit-btn" title="Change clinic link">Change URL</button>
+      </div>
+    </div>
+
+    <!-- Cinematic 3-2-1 Dental Countdown Overlay Screen -->
+    <div class="countdown-overlay" id="countdown-overlay">
+      <div class="countdown-backdrop dental-countdown-backdrop"></div>
+      
+      <div class="countdown-content">
+        <div class="countdown-hud-ring">
+          <svg class="progress-ring-svg" width="300" height="300">
+            <circle class="ring-bg" stroke="rgba(255,255,255,0.12)" stroke-width="5" fill="transparent" r="130" cx="150" cy="150" />
+            <circle id="countdown-progress-circle" class="ring-indicator" stroke="url(#dental-ring-gradient)" stroke-width="10" stroke-dasharray="816.8" stroke-dashoffset="0" stroke-linecap="round" fill="transparent" r="130" cx="150" cy="150" />
+            <defs>
+              <linearGradient id="dental-ring-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="30%" stop-color="#00e5ff" />
+                <stop offset="70%" stop-color="#00f5d4" />
+                <stop offset="100%" stop-color="#ffd166" />
+              </linearGradient>
+            </defs>
+          </svg>
+
+          <!-- Dynamic Number Display with Dental Milestones -->
+          <div class="countdown-number-box">
+            <div id="countdown-display" class="countdown-num dental-num">3</div>
+            <div id="countdown-label" class="countdown-sublabel dental-countdown-sublabel">STEP 3: PRECISION DIAGNOSTICS</div>
+          </div>
+        </div>
+
+        <!-- Dental Health Wave Pulse Visualizer -->
+        <div class="dental-pulse-wave">
+          <span class="dental-pulse-bar"></span>
+          <span class="dental-pulse-bar"></span>
+          <span class="dental-pulse-bar center-peak"></span>
+          <span class="dental-pulse-bar"></span>
+          <span class="dental-pulse-bar"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Celebration & Grand Clinic Reveal Panel -->
+    <div class="celebration-panel" id="celebration-panel">
+      <div class="celebration-card dental-celebration-card">
+        <div class="celebration-icon-wrap">
+          <span class="cel-spark">✨</span>
+          <div class="celebration-tooth-emblem">
+            <img 
+              src="assets/tooth_3d.png" 
+              alt="3D Dental Tooth Liftoff" 
+              class="cel-tooth-3d-img"
+            >
+          </div>
+          <span class="cel-spark">🎉</span>
+        </div>
+
+        <h2 class="celebration-heading dental-cel-heading">WELCOME TO YOUR NEW SMILE</h2>
+        <p class="celebration-info" id="celebration-info-text">
+          Entering the official dental clinic website in <span id="redirect-timer-seconds">2.5</span>s...
+        </p>
+
+        <!-- Progress bar filling towards website redirect -->
+        <div class="redirect-bar-container">
+          <div id="redirect-progress-bar" class="redirect-bar-fill dental-bar-fill"></div>
+        </div>
+
+        <div class="celebration-action-buttons">
+          <button id="open-now-btn" class="action-btn primary-action dental-primary-btn">
+            <span>Enter Dental Website Now</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </button>
+          <button id="relaunch-btn" class="action-btn secondary-action">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="1 4 1 10 7 10"></polyline>
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+            </svg>
+            <span>Celebrate Again</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Luxury Gold & Turquoise Side Pop Blaster Cannons (Left & Right) -->
+  <aside class="blaster-apparatus blaster-left dental-blaster-left" id="blaster-left" aria-hidden="true">
+    <div class="blaster-base">
+      <div class="blaster-glow-core dental-core-left"></div>
+      <div class="blaster-cannon-barrel dental-barrel">
+        <div class="barrel-stripes"></div>
+        <div class="barrel-gold-collar"></div>
+        <div class="nozzle-exit dental-nozzle">
+          <div class="muzzle-flash" id="muzzle-flash-left"></div>
+        </div>
+      </div>
+      <div class="blaster-label">SMILE POP BLASTER</div>
+    </div>
+  </aside>
+
+  <aside class="blaster-apparatus blaster-right dental-blaster-right" id="blaster-right" aria-hidden="true">
+    <div class="blaster-base">
+      <div class="blaster-glow-core dental-core-right"></div>
+      <div class="blaster-cannon-barrel dental-barrel">
+        <div class="barrel-stripes"></div>
+        <div class="barrel-gold-collar"></div>
+        <div class="nozzle-exit dental-nozzle">
+          <div class="muzzle-flash" id="muzzle-flash-right"></div>
+        </div>
+      </div>
+      <div class="blaster-label">CELEBRATION BLASTER</div>
+    </div>
+  </aside>
+
+  <!-- Live Opened Website Portal with Fireworks Celebration Overlay -->
+  <div class="website-portal-overlay" id="website-portal-overlay">
+    <div class="portal-header-bar">
+      <div class="portal-brand-identity">
+        <img src="assets/tooth_3d.png" alt="3D Tooth" class="portal-brand-tooth">
+        <div class="portal-brand-copy">
+          <span class="portal-live-title" id="portal-live-clinic-name">DR. AHALYA’S DENTO NEURO CENTRE</span>
+          <span class="portal-live-badge">🎆 OFFICIALLY UNVEILED & LIVE</span>
+        </div>
+      </div>
+
+      <div class="portal-control-actions">
+        <button id="fireworks-burst-btn" class="portal-action-btn" title="Ignite more fireworks & crackers">
+          <span>🎆 Crackers & Fireworks</span>
+        </button>
+        <button id="portal-open-tab-btn" class="portal-action-btn primary-portal-btn" title="Open website in full browser tab">
+          <span>Open in Full Tab ↗</span>
+        </button>
+        <button id="portal-close-btn" class="portal-action-btn close-portal-btn" title="Back to Launchpad">
+          <span>✕ Return</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Live Webpage Frame -->
+    <div class="portal-iframe-container">
+      <iframe id="opened-website-iframe" src="about:blank" title="Opened Dental Clinic Website"></iframe>
+    </div>
+  </div>
+
+  <!-- Destination URL & Clinic Customization Modal -->
+  <div class="modal-backdrop" id="url-modal">
+    <div class="modal-card dental-modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-icon"><img src="assets/tooth_3d.png" alt="3D Tooth" class="modal-tooth-3d-img"></div>
+          <h3>Dental Clinic Launch Settings</h3>
+        </div>
+        <button id="close-modal-btn" class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+
+      <p class="modal-subtitle">
+        Customize your dental clinic name and website destination. When patients or guests press <strong>UNVEIL YOUR SMILE</strong>, they will experience the countdown and pop blasters before being directed here.
+      </p>
+
+      <form id="url-config-form" class="url-form">
+        <div class="input-group">
+          <label for="clinic-name-input">Clinic / Doctor Name</label>
+          <div class="input-wrapper">
+            <span class="url-prefix-icon">🏥</span>
+            <input 
+              type="text" 
+              id="clinic-name-input" 
+              placeholder="e.g. Dr. Ahalya’s Dento Neuro Centre" 
+              value="Dr. Ahalya’s Dento Neuro Centre"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="website-url-input">Dental Website Target URL</label>
+          <div class="input-wrapper">
+            <span class="url-prefix-icon">🌐</span>
+            <input 
+              type="url" 
+              id="website-url-input" 
+              placeholder="https://yourdentalclinic.com" 
+              value="https://example.com" 
+              required
+              autocomplete="url"
+            >
+          </div>
+          <span class="input-hint">Your live dental website (include <code>https://</code>)</span>
+        </div>
+
+        <div class="toggle-group">
+          <label class="switch-label">
+            <input type="checkbox" id="open-new-tab-checkbox">
+            <span class="toggle-slider"></span>
+            <span class="toggle-text">Open dental website in a new tab</span>
+          </label>
+        </div>
+
+        <div class="toggle-group">
+          <label class="switch-label">
+            <input type="checkbox" id="auto-redirect-checkbox" checked>
+            <span class="toggle-slider"></span>
+            <span class="toggle-text">Auto-redirect after blaster celebration (2.5s)</span>
+          </label>
+        </div>
+
+        <div class="modal-buttons">
+          <button type="button" id="modal-cancel-btn" class="action-btn secondary-action">Cancel</button>
+          <button type="submit" class="action-btn primary-action dental-primary-btn">Save Settings</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

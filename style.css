@@ -1,0 +1,1932 @@
+/* ==========================================================================
+   LUMINA DENTAL CLINIC - LUXURY HEALTHCARE LAUNCH EXPERIENCE
+   Theme: Pristine Enamel White, Marine Cyan, Champagne Gold, & Frosted Crystal
+   ========================================================================== */
+
+:root {
+  /* Dental Color Tokens */
+  --dental-bg: #030a16;
+  --dental-bg-gradient: radial-gradient(circle at 50% 20%, #082440 0%, #030a16 75%, #01050c 100%);
+  --dental-card: rgba(8, 26, 48, 0.72);
+  --dental-card-border: rgba(0, 229, 255, 0.22);
+  --dental-card-hover: rgba(12, 38, 70, 0.85);
+
+  --accent-cyan: #00e5ff;
+  --accent-mint: #00f5d4;
+  --accent-sky: #48cae4;
+  --accent-pearl: #ffffff;
+  --accent-gold: #ffd166;
+  --accent-rose: #ff758c;
+
+  --text-main: #f0fdfa;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+
+  /* Gradients */
+  --grad-dental: linear-gradient(135deg, #ffffff 0%, #bbf2f6 30%, #00e5ff 70%, #00f5d4 100%);
+  --grad-gold-accent: linear-gradient(135deg, #ffe082 0%, #ffd166 50%, #f77f00 100%);
+  --grad-pearl-btn: radial-gradient(circle at 35% 30%, #0f3d61 0%, #061c31 65%, #030e1a 100%);
+  --grad-halo: radial-gradient(circle, rgba(0, 229, 255, 0.2) 0%, rgba(0, 245, 212, 0.08) 50%, transparent 75%);
+
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono: 'Space Grotesk', monospace;
+
+  /* Shadows */
+  --shadow-dental-glow: 0 0 35px rgba(0, 229, 255, 0.45);
+  --shadow-gold-glow: 0 0 30px rgba(255, 209, 102, 0.4);
+  --shadow-dental-card: 0 30px 70px -15px rgba(0, 0, 0, 0.8), 0 0 45px rgba(0, 229, 255, 0.15);
+
+  /* Transitions */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset & Base Setup */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: var(--dental-bg);
+  background: var(--dental-bg-gradient);
+  font-family: var(--font-sans);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
+}
+
+/* Canvas Layers */
+#bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#celebration-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 90;
+  pointer-events: none;
+}
+
+/* Floating Sparkle Ambient Layer */
+.sparkle-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.sparkle {
+  position: absolute;
+  color: var(--accent-gold);
+  font-size: 1.2rem;
+  filter: drop-shadow(0 0 8px rgba(255, 209, 102, 0.8));
+  animation: floatSparkle 6s infinite ease-in-out;
+  opacity: 0.6;
+}
+
+.s-1 { top: 15%; left: 18%; animation-delay: 0s; font-size: 1.5rem; color: #fff; }
+.s-2 { top: 35%; right: 20%; animation-delay: 1.5s; font-size: 1.1rem; }
+.s-3 { bottom: 25%; left: 22%; animation-delay: 3s; font-size: 1.3rem; color: var(--accent-cyan); }
+.s-4 { top: 60%; right: 15%; animation-delay: 4.2s; font-size: 1.4rem; }
+.s-5 { top: 20%; right: 38%; animation-delay: 2.2s; font-size: 0.9rem; color: #fff; }
+
+@keyframes floatSparkle {
+  0%, 100% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0.3; }
+  50% { transform: translateY(-16px) scale(1.2) rotate(45deg); opacity: 0.9; }
+}
+
+/* Top Clinic Bar */
+.top-bar {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2.5rem;
+  width: 100%;
+}
+
+.clinic-brand-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.6rem 1.3rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  border-radius: 999px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.clinic-logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(0, 229, 255, 0.22) 0%, rgba(2, 20, 38, 0.75) 85%);
+  border: 1.5px solid rgba(0, 229, 255, 0.45);
+  box-shadow: 
+    0 0 16px rgba(0, 229, 255, 0.35),
+    inset 0 1px 3px rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
+  transition: all 0.3s var(--ease-smooth);
+}
+
+@keyframes logoPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); filter: drop-shadow(0 0 14px rgba(0, 229, 255, 0.9)); }
+}
+
+.brand-text-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+}
+
+.brand-tagline {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: var(--accent-cyan);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  color: var(--text-main);
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-smooth);
+  backdrop-filter: blur(12px);
+}
+
+.icon-btn:hover {
+  background: rgba(0, 229, 255, 0.12);
+  border-color: rgba(0, 229, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 18px rgba(0, 229, 255, 0.25);
+}
+
+.icon-btn.active {
+  border-color: rgba(0, 229, 255, 0.6);
+  background: rgba(0, 229, 255, 0.1);
+  color: var(--accent-cyan);
+}
+
+/* Main Launch Arena */
+.launch-stage {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 1.5rem;
+  min-height: calc(100vh - 120px);
+}
+
+/* Luxury Dental Portal Card */
+.dental-card {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  background: var(--dental-card);
+  border: 1px solid var(--dental-card-border);
+  border-radius: 36px;
+  padding: 3.5rem 3rem;
+  text-align: center;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  box-shadow: var(--shadow-dental-card);
+  transition: transform 0.4s var(--ease-spring);
+  overflow: hidden;
+}
+
+.dental-card::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  left: -40%;
+  width: 180%;
+  height: 180%;
+  background: radial-gradient(circle at 50% 20%, rgba(0, 229, 255, 0.14) 0%, rgba(0, 245, 212, 0.06) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dental-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.badge-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.dental-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 1.2rem;
+  background: rgba(0, 229, 255, 0.08);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent-cyan);
+  box-shadow: 0 0 18px rgba(0, 229, 255, 0.18);
+}
+
+.tooth-glint {
+  color: var(--accent-gold);
+}
+
+.dental-title {
+  font-family: var(--font-sans);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.25rem;
+}
+
+.dental-gradient {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  background: var(--grad-dental);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  filter: drop-shadow(0 2px 20px rgba(0, 229, 255, 0.5));
+}
+
+.dental-subtitle {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  max-width: 500px;
+  margin: 0 auto 1.8rem;
+  font-weight: 400;
+}
+
+/* Dental Pillars / Perks Row */
+.dental-perks-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  max-width: 100%;
+}
+
+.perk-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  color: #cbd5e1;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.perk-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-mint);
+  box-shadow: 0 0 8px var(--accent-mint);
+}
+
+/* Master Dental Launch Button */
+.button-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0 2rem;
+  min-height: 190px;
+}
+
+/* Halo Radiance Rings */
+.dental-halo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: haloWave 4.5s infinite cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.halo-1 { width: 235px; height: 235px; animation-delay: 0s; }
+.halo-2 { width: 300px; height: 300px; animation-delay: 1.5s; border-color: rgba(0, 245, 212, 0.25); }
+.halo-3 { width: 375px; height: 375px; animation-delay: 3s; border-color: rgba(255, 209, 102, 0.2); }
+
+@keyframes haloWave {
+  0% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.85; }
+  70% { opacity: 0.2; }
+  100% { transform: translate(-50%, -50%) scale(1.4); opacity: 0; }
+}
+
+/* The Grand Oval/Round Dental Launch Button */
+.dental-launch-btn {
+  position: relative;
+  width: 235px;
+  height: 235px;
+  border-radius: 50%;
+  background: var(--grad-pearl-btn);
+  border: 2px solid rgba(0, 229, 255, 0.6);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-main);
+  box-shadow: 
+    0 0 0 7px rgba(0, 229, 255, 0.16),
+    0 22px 55px rgba(0, 0, 0, 0.85),
+    inset 0 0 35px rgba(0, 229, 255, 0.35),
+    0 0 60px rgba(0, 245, 212, 0.4);
+  transition: all 0.35s var(--ease-spring);
+  outline: none;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Conic border shimmer */
+.dental-launch-btn::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #00e5ff, #ffffff, #ffd166, #00f5d4, #00e5ff);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 2px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 2px));
+  animation: rotateOrbital 6s linear infinite;
+  opacity: 0.85;
+}
+
+@keyframes rotateOrbital {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Light sweep beam running across button */
+.btn-shimmer-sweep {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(60deg, transparent 40%, rgba(255, 255, 255, 0.28) 50%, transparent 60%);
+  animation: sweepLight 5s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes sweepLight {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  35%, 100% { transform: translateX(100%) rotate(25deg); }
+}
+
+.btn-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  padding: 0.5rem 0;
+}
+
+/* ==========================================================================
+   HIGH-CLARITY 3D PORCELAIN DENTAL TOOTH
+   ========================================================================== */
+
+.tooth-3d-container {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 700px;
+}
+
+.tooth-3d-aura {
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.45) 0%, rgba(0, 245, 212, 0.2) 45%, transparent 70%);
+  filter: blur(10px);
+  pointer-events: none;
+  animation: auraPulse 3.5s infinite alternate ease-in-out;
+}
+
+@keyframes auraPulse {
+  0% { transform: scale(0.9); opacity: 0.5; }
+  100% { transform: scale(1.2); opacity: 0.85; filter: blur(14px); }
+}
+
+.tooth-3d-perspective-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tooth-3d-img {
+  width: 92px;
+  height: 92px;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 15px rgba(0, 229, 255, 0.6)) drop-shadow(0 10px 22px rgba(0, 0, 0, 0.7));
+  animation: tooth3dFloat 3.5s infinite ease-in-out;
+  pointer-events: none;
+  user-select: none;
+}
+
+@keyframes tooth3dFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    filter: drop-shadow(0 0 16px rgba(0, 229, 255, 0.75)) brightness(1.08);
+  }
+  50% {
+    transform: translateY(-6px) rotate(1.5deg) scale(1.04);
+    filter: drop-shadow(0 0 24px rgba(0, 229, 255, 0.95)) brightness(1.15);
+  }
+}
+
+.tooth-3d-flare {
+  position: absolute;
+  top: 15%;
+  left: 28%;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 10%, rgba(255, 255, 255, 0.8) 40%, transparent 70%);
+  filter: blur(1px);
+  pointer-events: none;
+  animation: flareFlash 2.8s infinite alternate ease-in-out;
+}
+
+@keyframes flareFlash {
+  0%, 100% { opacity: 0.3; transform: scale(0.7); }
+  50% { opacity: 0.95; transform: scale(1.3); }
+}
+
+.tooth-3d-sparkle {
+  position: absolute;
+  pointer-events: none;
+  font-weight: 700;
+  animation: sparkle3dOrbit 3s infinite ease-in-out;
+}
+
+.spk-top-left {
+  top: 8px;
+  left: 8px;
+  color: #ffffff;
+  font-size: 1.15rem;
+  filter: drop-shadow(0 0 8px #ffffff);
+  animation-delay: 0s;
+}
+
+.spk-top-right {
+  top: 4px;
+  right: 10px;
+  color: var(--accent-gold);
+  font-size: 1.25rem;
+  filter: drop-shadow(0 0 8px var(--accent-gold));
+  animation-delay: 1.2s;
+}
+
+.spk-crown {
+  top: 14px;
+  left: 45%;
+  font-size: 0.95rem;
+  animation-delay: 2s;
+}
+
+@keyframes sparkle3dOrbit {
+  0%, 100% { transform: scale(0.75) rotate(0deg); opacity: 0.4; }
+  50% { transform: scale(1.3) rotate(90deg); opacity: 1; }
+}
+
+.dental-btn-title {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.75);
+  margin-top: 2px;
+  line-height: 1.1;
+}
+
+.dental-btn-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  font-weight: 800;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #00e5ff 0%, #00f5d4 100%);
+  color: #021526 !important;
+  padding: 0.32rem 0.9rem;
+  border-radius: 999px;
+  border: none;
+  box-shadow: 0 0 18px rgba(0, 229, 255, 0.75), 0 2px 6px rgba(0, 0, 0, 0.4);
+  margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  transition: all 0.25s var(--ease-smooth);
+}
+
+/* Button Hover State */
+.dental-launch-btn:hover {
+  transform: scale(1.06);
+  border-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    0 0 0 10px rgba(0, 229, 255, 0.25),
+    0 25px 65px rgba(0, 0, 0, 0.85),
+    inset 0 0 40px rgba(0, 229, 255, 0.55),
+    0 0 85px rgba(0, 245, 212, 0.7);
+}
+
+.dental-launch-btn:hover .tooth-3d-img {
+  transform: translateY(-6px) scale(1.1);
+  filter: drop-shadow(0 0 28px #ffffff) brightness(1.2);
+}
+
+.dental-launch-btn.launching {
+  pointer-events: none;
+  animation: dentalPulseLaunching 0.5s infinite alternate ease-in-out;
+}
+
+@keyframes dentalPulseLaunching {
+  0% { transform: scale(1); filter: brightness(1); }
+  100% { transform: scale(1.09); filter: brightness(1.4); }
+}
+
+/* Destination Link Indicator */
+.destination-preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 1.3rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(0, 229, 255, 0.15);
+  border-radius: 999px;
+  font-size: 0.82rem;
+}
+
+.dest-label {
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.dest-url {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  max-width: 230px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.dest-url:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.dest-edit-btn {
+  background: none;
+  border: none;
+  color: var(--accent-gold);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.dest-edit-btn:hover {
+  color: #fff;
+  background: rgba(255, 209, 102, 0.18);
+}
+
+/* ==========================================================================
+   DENTAL COUNTDOWN OVERLAY SYSTEM
+   ========================================================================== */
+
+.countdown-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.countdown-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.dental-countdown-backdrop {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(5, 20, 38, 0.92) 0%, rgba(2, 8, 16, 0.98) 100%);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+}
+
+.countdown-content {
+  position: relative;
+  z-index: 101;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.countdown-hud-ring {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-ring-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(-90deg);
+  filter: drop-shadow(0 0 25px rgba(0, 229, 255, 0.7));
+}
+
+.ring-indicator {
+  transition: stroke-dashoffset 0.8s ease;
+}
+
+.countdown-number-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.dental-num {
+  font-family: var(--font-mono);
+  font-size: 8rem;
+  font-weight: 900;
+  line-height: 1;
+  color: #ffffff;
+  text-shadow: 
+    0 0 25px rgba(0, 229, 255, 0.9),
+    0 0 60px rgba(0, 245, 212, 0.6);
+  transform: scale(0.8);
+  opacity: 0;
+  transition: all 0.25s var(--ease-spring);
+}
+
+.dental-num.animate-in {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.dental-num.blast-off {
+  font-size: 3.2rem;
+  letter-spacing: -0.02em;
+  background: var(--grad-dental);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 35px rgba(0, 229, 255, 0.85));
+  animation: smileGlowPulse 0.4s infinite alternate;
+}
+
+@keyframes smileGlowPulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
+}
+
+.dental-countdown-sublabel {
+  margin-top: 1.1rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #f0fdfa;
+  text-transform: uppercase;
+  max-width: 215px;
+  line-height: 1.45;
+  text-align: center;
+  background: rgba(6, 22, 42, 0.9);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 229, 255, 0.45);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+}
+
+/* Dental Pulse Wave */
+.dental-pulse-wave {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  height: 28px;
+}
+
+.dental-pulse-bar {
+  width: 5px;
+  height: 10px;
+  background: var(--accent-cyan);
+  border-radius: 4px;
+  animation: pulseBar 0.9s infinite ease-in-out alternate;
+}
+
+.dental-pulse-bar:nth-child(2) { animation-delay: 0.2s; background: var(--accent-mint); }
+.dental-pulse-bar.center-peak { animation-delay: 0.4s; height: 140%; background: #ffffff; box-shadow: 0 0 10px #ffffff; }
+.dental-pulse-bar:nth-child(4) { animation-delay: 0.6s; background: var(--accent-gold); }
+.dental-pulse-bar:nth-child(5) { animation-delay: 0.8s; background: var(--accent-cyan); }
+
+@keyframes pulseBar {
+  0% { height: 8px; opacity: 0.3; }
+  100% { height: 28px; opacity: 1; }
+}
+
+/* ==========================================================================
+   TURQUOISE & GOLD SIDE POP BLASTER CANNONS
+   ========================================================================== */
+
+.blaster-apparatus {
+  position: fixed;
+  bottom: 0;
+  z-index: 85;
+  width: 150px;
+  height: 170px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.blaster-left { left: 1.5rem; }
+.blaster-right { right: 1.5rem; }
+
+.blaster-base {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.blaster-glow-core {
+  position: absolute;
+  bottom: 25px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.6) 0%, transparent 70%);
+  animation: blasterCorePulse 2s infinite alternate ease-in-out;
+}
+
+.dental-core-right {
+  background: radial-gradient(circle, rgba(255, 209, 102, 0.6) 0%, transparent 70%);
+}
+
+@keyframes blasterCorePulse {
+  0% { transform: scale(0.9); opacity: 0.5; }
+  100% { transform: scale(1.3); opacity: 0.9; }
+}
+
+/* Striped Turquoise & Gold Blaster Barrel */
+.dental-barrel {
+  position: relative;
+  width: 44px;
+  height: 98px;
+  background: linear-gradient(135deg, #00b4d8 0%, #0077b6 50%, #03045e 100%);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 14px 14px 6px 6px;
+  transform-origin: bottom center;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 229, 255, 0.3);
+  transition: transform 0.15s ease-out;
+}
+
+.blaster-left .dental-barrel {
+  transform: rotate(38deg);
+}
+
+.blaster-right .dental-barrel {
+  transform: rotate(-38deg);
+}
+
+/* Gold Collar Band */
+.barrel-gold-collar {
+  position: absolute;
+  top: 28px;
+  left: -2px;
+  right: -2px;
+  height: 12px;
+  background: var(--grad-gold-accent);
+  border-radius: 3px;
+  box-shadow: 0 0 14px rgba(255, 209, 102, 0.7);
+}
+
+.dental-nozzle {
+  position: absolute;
+  top: -10px;
+  left: -5px;
+  right: -5px;
+  height: 14px;
+  background: #021226;
+  border: 2px solid var(--accent-gold);
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(255, 209, 102, 0.5);
+}
+
+.muzzle-flash {
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 15%, #ffd166 45%, #00e5ff 75%, transparent 90%);
+  filter: blur(2px);
+  pointer-events: none;
+  opacity: 0;
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+}
+
+.muzzle-flash.flash-active {
+  transform: translateX(-50%) scale(2.4);
+  opacity: 1;
+}
+
+.blaster-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent-cyan);
+  margin-top: 10px;
+  text-align: center;
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+}
+
+/* Blaster Recoil Keyframes */
+.blaster-left.firing .dental-barrel {
+  animation: leftDentalRecoil 0.35s ease-out;
+}
+
+.blaster-right.firing .dental-barrel {
+  animation: rightDentalRecoil 0.35s ease-out;
+}
+
+@keyframes leftDentalRecoil {
+  0% { transform: rotate(38deg) translateY(0); }
+  25% { transform: rotate(38deg) translateY(16px); }
+  100% { transform: rotate(38deg) translateY(0); }
+}
+
+@keyframes rightDentalRecoil {
+  0% { transform: rotate(-38deg) translateY(0); }
+  25% { transform: rotate(-38deg) translateY(16px); }
+  100% { transform: rotate(-38deg) translateY(0); }
+}
+
+/* ==========================================================================
+   DENTAL CELEBRATION STATUS PANEL
+   ========================================================================== */
+
+.celebration-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s var(--ease-spring);
+  transform: scale(0.92);
+}
+
+.celebration-panel.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.dental-celebration-card {
+  position: relative;
+  width: 90%;
+  max-width: 540px;
+  background: rgba(6, 22, 42, 0.94);
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  border-radius: 32px;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  box-shadow: 
+    0 25px 65px rgba(0, 0, 0, 0.85),
+    0 0 55px rgba(0, 229, 255, 0.3);
+  animation: floatCelebration 4s infinite ease-in-out;
+}
+
+@keyframes floatCelebration {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.celebration-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.celebration-tooth-emblem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: celToothGleam 2s infinite alternate ease-in-out;
+}
+
+.cel-tooth-3d-img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 16px rgba(0, 229, 255, 0.7));
+}
+
+@keyframes celToothGleam {
+  0% { transform: scale(1) rotate(-3deg); }
+  100% { transform: scale(1.15) rotate(3deg); }
+}
+
+.dental-cel-heading {
+  font-family: var(--font-sans);
+  font-size: 1.85rem;
+  font-weight: 800;
+  background: var(--grad-dental);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.8rem;
+  letter-spacing: -0.01em;
+}
+
+.celebration-info {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-bottom: 1.8rem;
+}
+
+#redirect-timer-seconds {
+  color: var(--accent-cyan);
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+.redirect-bar-container {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.dental-bar-fill {
+  background: linear-gradient(90deg, #00e5ff 0%, #00f5d4 50%, #ffd166 100%);
+  box-shadow: 0 0 12px var(--accent-cyan);
+}
+
+.celebration-action-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-smooth);
+  border: none;
+  outline: none;
+}
+
+.dental-primary-btn {
+  background: linear-gradient(135deg, #00e5ff 0%, #00f5d4 100%);
+  color: #031526;
+  font-weight: 700;
+  box-shadow: 0 4px 22px rgba(0, 229, 255, 0.45);
+}
+
+.dental-primary-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 30px rgba(0, 229, 255, 0.7);
+  filter: brightness(1.1);
+}
+
+.secondary-action {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-main);
+}
+
+.secondary-action:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   DENTAL CLINIC CONFIG MODAL
+   ========================================================================== */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(3, 10, 20, 0.8);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  padding: 1.5rem;
+}
+
+.modal-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.dental-modal-card {
+  width: 100%;
+  max-width: 500px;
+  background: #091e36;
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 26px;
+  padding: 2.4rem;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85), 0 0 40px rgba(0, 229, 255, 0.2);
+  transform: scale(0.92);
+  transition: transform 0.3s var(--ease-spring);
+}
+
+.modal-backdrop.open .dental-modal-card {
+  transform: scale(1);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.modal-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.modal-icon {
+  font-size: 1.4rem;
+}
+
+.modal-header h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.modal-close:hover {
+  color: #fff;
+}
+
+.modal-subtitle {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+  margin-bottom: 1.6rem;
+}
+
+.url-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  text-align: left;
+}
+
+.input-group label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.url-prefix-icon {
+  position: absolute;
+  left: 14px;
+  font-size: 1rem;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.input-wrapper input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  border-radius: 12px;
+  padding: 0.85rem 1rem 0.85rem 2.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-wrapper input:focus {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 18px rgba(0, 229, 255, 0.35);
+}
+
+.input-hint {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.input-hint code {
+  color: var(--accent-cyan);
+  background: rgba(0, 229, 255, 0.1);
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+}
+
+.toggle-group {
+  display: flex;
+  align-items: center;
+}
+
+.switch-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.switch-label input {
+  display: none;
+}
+
+.toggle-slider {
+  position: relative;
+  width: 42px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  transition: background-color 0.25s ease;
+  flex-shrink: 0;
+}
+
+.toggle-slider::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.25s var(--ease-spring);
+}
+
+.switch-label input:checked + .toggle-slider {
+  background: var(--accent-cyan);
+}
+
+.switch-label input:checked + .toggle-slider::after {
+  transform: translateX(18px);
+}
+
+.toggle-text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN & MOBILE OPTIMIZATIONS
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .top-bar {
+    padding: 1rem 1.25rem;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: center;
+  }
+
+  .dental-card {
+    padding: 2.5rem 1.5rem;
+    border-radius: 26px;
+  }
+
+  .dental-title {
+    font-size: 2.2rem;
+  }
+
+  .dental-launch-btn {
+    width: 180px;
+    height: 180px;
+  }
+
+  .halo-1 { width: 180px; height: 180px; }
+  .halo-2 { width: 235px; height: 235px; }
+  .halo-3 { width: 290px; height: 290px; }
+
+  .tooth-3d-container {
+    width: 75px;
+    height: 75px;
+  }
+
+  .tooth-3d-img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .dental-btn-title {
+    font-size: 0.74rem;
+  }
+
+  .dental-btn-subtitle {
+    font-size: 0.6rem;
+    padding: 0.22rem 0.65rem;
+  }
+
+  .blaster-apparatus {
+    width: 95px;
+    height: 115px;
+  }
+
+  .blaster-left { left: 0.5rem; }
+  .blaster-right { right: 0.5rem; }
+
+  .dental-barrel {
+    width: 32px;
+    height: 70px;
+  }
+
+  .blaster-label {
+    display: none;
+  }
+
+  .dental-num {
+    font-size: 5.5rem;
+  }
+}
+
+/* ==========================================================================
+   SMALL THEME TOGGLE BUTTON
+   ========================================================================== */
+
+.theme-btn {
+  padding: 0.44rem 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-color: rgba(0, 229, 255, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+  gap: 0.45rem;
+}
+
+.theme-btn:hover {
+  background: rgba(0, 229, 255, 0.16);
+  border-color: rgba(0, 229, 255, 0.6);
+}
+
+/* ==========================================================================
+   LIGHT GRAY LUXURY DENTAL THEME (body.theme-light-gray)
+   Aesthetic Platinum, Soft Gray & Crystal Marine Accents
+   ========================================================================== */
+
+body.theme-light-gray {
+  background-color: #f1f5f9;
+  background: radial-gradient(circle at 50% 15%, #ffffff 0%, #f1f5f9 45%, #e2e8f0 100%);
+  color: #0f172a;
+}
+
+body.theme-light-gray .sparkle {
+  color: #f59e0b;
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.6));
+}
+
+body.theme-light-gray .sparkle.s-1,
+body.theme-light-gray .sparkle.s-5 {
+  color: #0284c7;
+}
+
+/* Top Navigation Bar in Light Gray */
+body.theme-light-gray .clinic-brand-pill {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  box-shadow: 0 4px 20px rgba(100, 116, 139, 0.12);
+}
+
+body.theme-light-gray .brand-title {
+  color: #0f172a;
+}
+
+body.theme-light-gray .brand-tagline {
+  color: #0284c7;
+}
+
+body.theme-light-gray .icon-btn {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  color: #334155;
+  box-shadow: 0 2px 8px rgba(100, 116, 139, 0.08);
+}
+
+body.theme-light-gray .icon-btn:hover {
+  background: #ffffff;
+  border-color: #0284c7;
+  color: #0284c7;
+  box-shadow: 0 4px 15px rgba(2, 132, 199, 0.2);
+}
+
+body.theme-light-gray .icon-btn.active {
+  background: rgba(2, 132, 199, 0.1);
+  border-color: #0284c7;
+  color: #0284c7;
+}
+
+/* Central Portal Card in Light Gray */
+body.theme-light-gray .dental-card {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(203, 213, 225, 0.85);
+  box-shadow: 
+    0 25px 60px -15px rgba(100, 116, 139, 0.25),
+    0 0 35px rgba(2, 132, 199, 0.1);
+}
+
+body.theme-light-gray .dental-card::before {
+  background: radial-gradient(circle at 50% 20%, rgba(2, 132, 199, 0.12) 0%, rgba(13, 148, 136, 0.05) 45%, transparent 70%);
+}
+
+body.theme-light-gray .dental-badge {
+  background: rgba(2, 132, 199, 0.08);
+  border-color: rgba(2, 132, 199, 0.35);
+  color: #0369a1;
+  box-shadow: 0 0 14px rgba(2, 132, 199, 0.12);
+}
+
+body.theme-light-gray .dental-title {
+  color: #0f172a;
+}
+
+body.theme-light-gray .dental-gradient {
+  background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 40%, #0d9488 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 14px rgba(2, 132, 199, 0.3));
+}
+
+body.theme-light-gray .dental-subtitle {
+  color: #475569;
+}
+
+body.theme-light-gray .perk-pill {
+  background: #ffffff;
+  border-color: rgba(203, 213, 225, 0.85);
+  color: #1e293b;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(100, 116, 139, 0.1);
+  white-space: nowrap;
+}
+
+body.theme-light-gray .perk-dot {
+  background: #0d9488;
+  box-shadow: 0 0 6px #0d9488;
+}
+
+/* Master Launch Button in Light Gray */
+body.theme-light-gray .dental-halo {
+  border-color: rgba(2, 132, 199, 0.3);
+}
+
+body.theme-light-gray .halo-2 {
+  border-color: rgba(13, 148, 136, 0.22);
+}
+
+body.theme-light-gray .halo-3 {
+  border-color: rgba(245, 158, 11, 0.18);
+}
+
+body.theme-light-gray .dental-launch-btn {
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #f8fafc 55%, #e2e8f0 100%);
+  border-color: rgba(2, 132, 199, 0.65);
+  box-shadow: 
+    0 0 0 7px rgba(2, 132, 199, 0.15),
+    0 22px 50px rgba(100, 116, 139, 0.35),
+    inset 0 0 35px rgba(2, 132, 199, 0.16),
+    0 0 50px rgba(13, 148, 136, 0.22);
+}
+
+body.theme-light-gray .dental-launch-btn::before {
+  background: conic-gradient(from 0deg, #0284c7, #38bdf8, #f59e0b, #10b981, #0284c7);
+}
+
+body.theme-light-gray .tooth-3d-aura {
+  background: radial-gradient(circle, rgba(2, 132, 199, 0.3) 0%, rgba(13, 148, 136, 0.15) 45%, transparent 70%);
+}
+
+body.theme-light-gray .tooth-3d-img {
+  filter: drop-shadow(0 6px 18px rgba(2, 132, 199, 0.45)) drop-shadow(0 14px 26px rgba(100, 116, 139, 0.4));
+}
+
+body.theme-light-gray .dental-btn-title {
+  color: #0f172a;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.95);
+}
+
+body.theme-light-gray .dental-btn-subtitle {
+  background: #0284c7 !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  font-size: 0.72rem !important;
+  box-shadow: 0 3px 12px rgba(2, 132, 199, 0.45) !important;
+  border: none !important;
+  text-shadow: none !important;
+}
+
+body.theme-light-gray .dental-launch-btn:hover .dental-btn-subtitle {
+  background: #0369a1 !important;
+  box-shadow: 0 4px 16px rgba(2, 132, 199, 0.6) !important;
+}
+
+body.theme-light-gray .destination-preview {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(203, 213, 225, 0.85);
+}
+
+body.theme-light-gray .dest-label {
+  color: #64748b;
+}
+
+body.theme-light-gray .dest-url {
+  color: #0284c7;
+}
+
+body.theme-light-gray .dest-edit-btn {
+  color: #b45309;
+}
+
+body.theme-light-gray .dest-edit-btn:hover {
+  background: rgba(245, 158, 11, 0.15);
+  color: #92400e;
+}
+
+/* Countdown Overlay in Light Gray */
+body.theme-light-gray .dental-countdown-backdrop {
+  background: radial-gradient(circle, rgba(241, 245, 249, 0.94) 0%, rgba(226, 232, 240, 0.98) 100%);
+}
+
+body.theme-light-gray .ring-bg {
+  stroke: rgba(148, 163, 184, 0.25);
+}
+
+body.theme-light-gray .dental-num {
+  color: #0f172a;
+  text-shadow: 0 0 25px rgba(2, 132, 199, 0.45), 0 0 50px rgba(13, 148, 136, 0.35);
+}
+
+body.theme-light-gray .dental-countdown-sublabel {
+  color: #0f172a;
+  background: #ffffff;
+  border: 1.5px solid rgba(2, 132, 199, 0.5);
+  box-shadow: 0 4px 18px rgba(100, 116, 139, 0.2);
+  font-weight: 800;
+  text-shadow: none;
+}
+
+body.theme-light-gray .dental-pulse-bar {
+  background: #0284c7;
+}
+
+body.theme-light-gray .dental-pulse-bar:nth-child(2) { background: #0d9488; }
+body.theme-light-gray .dental-pulse-bar.center-peak { background: #0f172a; }
+body.theme-light-gray .dental-pulse-bar:nth-child(4) { background: #f59e0b; }
+body.theme-light-gray .dental-pulse-bar:nth-child(5) { background: #0284c7; }
+
+/* Blaster Cannon Labels in Light Gray */
+body.theme-light-gray .blaster-label {
+  color: #0369a1;
+  text-shadow: 0 0 6px rgba(2, 132, 199, 0.25);
+}
+
+/* Celebration Card in Light Gray */
+body.theme-light-gray .dental-celebration-card {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(2, 132, 199, 0.35);
+  box-shadow: 
+    0 25px 65px rgba(100, 116, 139, 0.35),
+    0 0 45px rgba(2, 132, 199, 0.18);
+}
+
+body.theme-light-gray .dental-cel-heading {
+  background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 45%, #0d9488 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+body.theme-light-gray .celebration-info {
+  color: #475569;
+}
+
+body.theme-light-gray #redirect-timer-seconds {
+  color: #0284c7;
+}
+
+body.theme-light-gray .redirect-bar-container {
+  background: rgba(148, 163, 184, 0.25);
+}
+
+body.theme-light-gray .secondary-action {
+  background: rgba(148, 163, 184, 0.15);
+  border-color: rgba(148, 163, 184, 0.35);
+  color: #0f172a;
+}
+
+body.theme-light-gray .secondary-action:hover {
+  background: rgba(148, 163, 184, 0.25);
+}
+
+/* Modal in Light Gray */
+body.theme-light-gray .modal-backdrop {
+  background: rgba(15, 23, 42, 0.55);
+}
+
+body.theme-light-gray .dental-modal-card {
+  background: #ffffff;
+  border-color: rgba(203, 213, 225, 0.95);
+  box-shadow: 0 30px 75px rgba(100, 116, 139, 0.35);
+}
+
+body.theme-light-gray .modal-header h3 {
+  color: #0f172a;
+}
+
+body.theme-light-gray .modal-subtitle {
+  color: #64748b;
+}
+
+body.theme-light-gray .input-group label {
+  color: #475569;
+}
+
+body.theme-light-gray .input-wrapper input {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+body.theme-light-gray .input-wrapper input:focus {
+  border-color: #0284c7;
+  box-shadow: 0 0 15px rgba(2, 132, 199, 0.25);
+}
+
+body.theme-light-gray .toggle-text {
+  color: #475569;
+}
+
+/* ==========================================================================
+   3D BRAND ICON & MODAL ICON STYLING
+   ========================================================================== */
+
+.brand-tooth-3d-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 229, 255, 0.7));
+  animation: logoPulse 3s infinite ease-in-out;
+}
+
+body.theme-light-gray .brand-tooth-3d-img {
+  filter: drop-shadow(0 2px 6px rgba(2, 132, 199, 0.45));
+}
+
+body.theme-light-gray .clinic-logo-icon {
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #e0f2fe 60%, #bae6fd 100%);
+  border: 1.5px solid rgba(2, 132, 199, 0.4);
+  box-shadow: 
+    0 2px 10px rgba(2, 132, 199, 0.2),
+    inset 0 1px 2px #ffffff;
+  filter: none;
+}
+
+.modal-tooth-3d-img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0, 229, 255, 0.6));
+}
+
+/* ==========================================================================
+   PORTAL OPEN STATE - REMOVE LAUNCH UI FROM OPENED WEBSITE SCREEN
+   ========================================================================== */
+
+body.portal-open .top-bar,
+body.portal-open .blaster-apparatus,
+body.portal-open .sparkle-layer,
+body.portal-open .launch-stage,
+body.portal-open #bg-canvas,
+body.portal-open #celebration-canvas,
+body.portal-open .celebration-panel,
+body.portal-open .countdown-overlay {
+  display: none !important;
+}
+
+body.portal-open {
+  overflow: hidden !important;
+}
+
+/* ==========================================================================
+   GRAND FIREWORKS & CRACKERS CELEBRATION CANVAS
+   ========================================================================== */
+
+#fireworks-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100000;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   LIVE OPENED WEBSITE PORTAL WITH CELEBRATION OVERLAY
+   ========================================================================== */
+
+.website-portal-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  background: #020b18;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.96);
+  transition: opacity 0.4s ease, transform 0.4s var(--ease-spring);
+}
+
+.website-portal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.portal-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.8rem;
+  background: rgba(6, 22, 42, 0.96);
+  border-bottom: 1px solid rgba(0, 229, 255, 0.35);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 10;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+}
+
+.portal-brand-identity {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.portal-brand-tooth {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 229, 255, 0.7));
+}
+
+.portal-brand-copy {
+  display: flex;
+  flex-direction: column;
+}
+
+.portal-live-title {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.08em;
+}
+
+.portal-live-badge {
+  font-size: 0.65rem;
+  color: #00f5d4;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.portal-control-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.portal-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-smooth);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  outline: none;
+}
+
+.portal-action-btn:hover {
+  background: rgba(0, 229, 255, 0.18);
+  border-color: rgba(0, 229, 255, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+}
+
+.primary-portal-btn {
+  background: linear-gradient(135deg, #00e5ff 0%, #00f5d4 100%);
+  color: #021226;
+  border: none;
+}
+
+.primary-portal-btn:hover {
+  box-shadow: 0 4px 18px rgba(0, 229, 255, 0.6);
+  filter: brightness(1.1);
+}
+
+.close-portal-btn:hover {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: rgba(239, 68, 68, 0.6);
+  color: #fca5a5;
+}
+
+.portal-iframe-container {
+  flex: 1;
+  width: 100%;
+  height: calc(100vh - 65px);
+  position: relative;
+  background: #ffffff;
+}
+
+#opened-website-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #ffffff;
+}
+
+
