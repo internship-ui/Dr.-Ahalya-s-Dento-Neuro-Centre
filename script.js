@@ -1,9 +1,15 @@
 /**
  * ============================================================================
  * LUMINA DENTAL CLINIC - LAUNCH EXPERIENCE ENGINE
- * Dual Side Pop Blasters, Crystalline Audio Synthesizer & 3-2-1 Dental Countdown
+ * Dual Side Pop Blasters, 3D Porcelain Enamel Tooth & Dental Countdown
  * ============================================================================
  */
+
+// Zero sound effects enforcement (100% silent launch experience)
+try {
+  window.AudioContext = null;
+  window.webkitAudioContext = null;
+} catch (e) {}
 
 // ---------------------------------------------------------------------------
 // 1. Configuration & Persistent State
@@ -14,7 +20,7 @@ const DENTAL_LAUNCH_CONFIG = {
   openInNewTab: false,
   autoRedirect: true,
   theme: localStorage.getItem('launch_theme') || 'dark',
-  redirectDelayMs: 2800,
+  redirectDelayMs: 2500,
   soundEnabled: false
 };
 try { localStorage.removeItem('launch_target_url'); } catch (e) {}
@@ -268,11 +274,9 @@ class FireworksCrackersEngine {
     const x = this.width * 0.15 + Math.random() * (this.width * 0.7);
     const y = this.height * 0.2 + Math.random() * (this.height * 0.45);
     this.explodeCracker(x, y);
-    sounds.playCracker();
   }
 
   explodeShell(x, y, color) {
-    sounds.playFireworkBoom();
     const count = 80 + Math.floor(Math.random() * 50);
     for (let i = 0; i < count; i++) {
       const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.2;
@@ -516,11 +520,6 @@ document.addEventListener('DOMContentLoaded', () => {
     themeToggleBtn.addEventListener('click', () => {
       const nextTheme = DENTAL_LAUNCH_CONFIG.theme === 'light-gray' ? 'dark' : 'light-gray';
       applyTheme(nextTheme);
-      if (nextTheme === 'light-gray') {
-        sounds.playCrystalChime(784, 0.16); // High crisp bell
-      } else {
-        sounds.playCrystalChime(523, 0.16); // Deep warm bell
-      }
     });
   }
 
@@ -534,13 +533,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const fireworksCanvas = document.getElementById('fireworks-canvas');
   const fireworksEngine = new FireworksCrackersEngine(fireworksCanvas);
 
-  // Live Opened Website Portal Elements
-  const websitePortalOverlay = document.getElementById('website-portal-overlay');
-  const openedWebsiteIframe = document.getElementById('opened-website-iframe');
-  const portalLiveClinicName = document.getElementById('portal-live-clinic-name');
-  const fireworksBurstBtn = document.getElementById('fireworks-burst-btn');
-  const portalOpenTabBtn = document.getElementById('portal-open-tab-btn');
-  const portalCloseBtn = document.getElementById('portal-close-btn');
+
 
   // Circumference: 2 * Math.PI * 130 = ~816.81
   const CIRCLE_CIRCUMFERENCE = 816.81;
@@ -601,12 +594,13 @@ document.addEventListener('DOMContentLoaded', () => {
       blasterRight.classList.remove('firing');
     }, 450);
 
-    // Audio: Pneumatic blast + grand celebration fanfare
-    sounds.playPopBlaster();
-    sounds.playCelebrationFanfare();
-
     // Trigger dual side particle celebration
     celebrationEngine.blast();
+
+    // Trigger grand fireworks and crackers show across the canvas!
+    if (fireworksEngine) {
+      fireworksEngine.startShow(4500);
+    }
 
     // Subtle tactile page resonance
     document.body.style.transform = 'translateY(3px)';
@@ -620,23 +614,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function executeWebsiteNavigation() {
     celebrationPanel.classList.remove('active');
-    document.body.classList.add('portal-open');
-    if (portalLiveClinicName) {
-      portalLiveClinicName.textContent = DENTAL_LAUNCH_CONFIG.clinicName;
-    }
-
-    // Seamlessly open live website portal with continuous fireworks & crackers celebration!
-    if (openedWebsiteIframe && websitePortalOverlay) {
-      openedWebsiteIframe.src = DENTAL_LAUNCH_CONFIG.targetUrl;
-      websitePortalOverlay.classList.add('active');
-      fireworksEngine.startShow(10000); // 10s of rockets & crackling crackers
-    } else {
-      window.location.href = DENTAL_LAUNCH_CONFIG.targetUrl;
-    }
-
-    if (DENTAL_LAUNCH_CONFIG.openNewTab) {
-      window.open(DENTAL_LAUNCH_CONFIG.targetUrl, '_blank', 'noopener,noreferrer');
-    }
+    // Direct navigation to official clinic website (no iframe / no blank screen / full responsive display)
+    window.location.href = DENTAL_LAUNCH_CONFIG.targetUrl;
   }
 
   function startLaunchCountdown() {
@@ -652,10 +631,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function updateStep(step) {
-      if (step === 3) sounds.playCrystalChime(587.33, 0.35); // D5
-      if (step === 2) sounds.playCrystalChime(739.99, 0.35); // F#5
-      if (step === 1) sounds.playCrystalChime(880.00, 0.4);  // A5
-
       countdownDisplay.classList.remove('animate-in', 'blast-off');
       void countdownDisplay.offsetWidth; // Force reflow
 
@@ -753,11 +728,6 @@ document.addEventListener('DOMContentLoaded', () => {
     progressCircle.style.strokeDashoffset = 0;
     celebrationEngine.clear();
     fireworksEngine.clear();
-    document.body.classList.remove('portal-open');
-    if (websitePortalOverlay) {
-      websitePortalOverlay.classList.remove('active');
-      if (openedWebsiteIframe) openedWebsiteIframe.src = 'about:blank';
-    }
   }
 
   // Master Launch Button Click
@@ -774,23 +744,4 @@ document.addEventListener('DOMContentLoaded', () => {
   relaunchBtn.addEventListener('click', () => {
     resetLaunchExperience();
   });
-
-  // Live Portal Control Handlers
-  if (fireworksBurstBtn) {
-    fireworksBurstBtn.addEventListener('click', () => {
-      fireworksEngine.startShow(6000);
-    });
-  }
-
-  if (portalOpenTabBtn) {
-    portalOpenTabBtn.addEventListener('click', () => {
-      window.open(DENTAL_LAUNCH_CONFIG.targetUrl, '_blank', 'noopener,noreferrer');
-    });
-  }
-
-  if (portalCloseBtn) {
-    portalCloseBtn.addEventListener('click', () => {
-      resetLaunchExperience();
-    });
-  }
 });

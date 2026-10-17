@@ -15,6 +15,7 @@
   // -------------------------------------------------------------------------
   // 1. Silent Audio Engine (Sound Completely Disabled)
   // -------------------------------------------------------------------------
+  function getAudioContext() { return null; }
   function playFireworkBoom() {}
   function playCrackerPop() {}
 
@@ -282,7 +283,6 @@
     if (reigniteBtn) {
       reigniteBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        getAudioContext();
         startCelebrationShow(6000);
       });
     }
@@ -311,7 +311,6 @@
 
     // Export global trigger function
     window.triggerFireworks = function (duration = 6000) {
-      getAudioContext();
       startCelebrationShow(duration);
     };
   }
